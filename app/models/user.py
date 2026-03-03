@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
-from app.models.base import Base
+from app.db.base import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -9,7 +9,7 @@ class User(Base):
     name = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True, index=True)
     password = Column(String, nullable=False)
-    profile_id = Column(Integer, ForeignKey("profiles.id"), nullable=False, unique=True)
+    profile_id = Column(Integer, ForeignKey("profiles.id"), nullable=True, unique=True)
 
     profile = relationship("Profile", backref="user", uselist=False)
 
